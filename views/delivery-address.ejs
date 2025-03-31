@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+
+</head>
+ 
+
+   <!-- for responsiveness -->
+   <style>
+
+   </style>
+<body>
+    <div class="upper-delivery-image">
+        <img src="https://t3.ftcdn.net/jpg/04/64/84/96/360_F_464849683_sufM4KGKU2waBvXeqr2WBtwjtrDYygA2.jpg" alt="">
+    </div>
+    <div class="main-delivery-address">
+        <div class="purchaseproductdetail" >
+            <div class="shopping-heading"><h2>Product</h2></div>
+            
+          <div class="shopping-photo-detail">
+           <div class="shoppingphoto">
+               
+               <% if (product && product.image) { %>
+                   <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="">
+               <% } else { %>
+                   <p>No image available</p>
+               <% } %>
+           </div>
+            <div class="shopping-product-detail">
+                <%if(product){%>
+                   <h2><%= product.name %></h2>
+           
+           <p>Price: $<%= product.price %>.00</p>
+           <p> Color: <%= product.color || 'Not specified' %></p>
+           <p> Size: <%= product.size || 'Not specified' %></p>
+           <p> Quantity: <%= product.quantity || 'Not specified' %></p>
+        
+             
+   
+               <% 
+                
+               const price = product.price || 0; 
+               const quantity = product.quantity || 0;  
+       
+               
+               const subtotal = price * quantity;
+           %>
+       
+           <p> Sub-total: $<%=subtotal%>.00</p>
+             <% }else{%>
+                   <p>no information</p>
+               <% }%>
+            </div>
+          </div>
+        
+           
+   
+   
+       </div>
+        <div class="address-div">
+            <h2>Delivery</h2>
+        <% if (product){%>
+            <form action="/proceed/<%=product._id%>" id="delivery-address-form" method="post">
+                <input type="text" id="first-name" name="firstname"    placeholder="First Name">
+                <input type="text" id="last-name" name="lastname"     placeholder="Last Name">
+                
+                <div class="country-div">
+                    
+                    <label for="country">Country:</label>
+                    <select    name="country" id="country"    >
+                        <option value="IND">India</option>
+                        <option value="USA">United States</option>
+                        <option value="Canada">Canada</option>
+                        <option value="AUS">Australia</option>
+                        <option value="NZ">Newzeland</option>
+                    </select>
+              
+            </div>
+    
+            <div class="state-div">
+                <label for="state">State:</label>
+                <select name="state" id="country"    >
+                    <option value="jk">Jammu & Kashmir</option>
+                    <option value="PB">Punjab</option>
+                    <option value="DL">Delhi</option>
+                    <option value="MUM">Mumbai</option>
+                    <option value="Hyderbad">Hyderbad</option>
+                </select>
+            </div>
+            <input type="text" id="city" name="city"      placeholder="City">
+            <input type="text" id="pincode" name="pincode"     placeholder="PIN Code">
+             <input type="text" id="add" name="address"     placeholder="Address">
+             <input type="number" id="phn" name="number"  placeholder="Phone">
+    
+       <button class="proceed" type="submit">Proceed</button>
+          
+               
+             </form>  
+       <% }else{ %>
+        <p>no form</p>
+       <%}%>
+          
+            
+    
+        </div>
+         
+       
+    </div>
+    
+ 
+</body>
+</html>

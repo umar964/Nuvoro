@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- <style>
+    #zoom{
+        height: 600px;
+        width: 500px;
+        position: relative;
+        /* z-index: 888; */
+
+    }
+    #zoom img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: 0 0;
+    }
+    #zoom::after{
+        display: var(--display,none);
+        content: '';
+        width: 750px;
+        height: 650px;
+        background-color: black;
+        background-image :var(--url);
+        background-size: 200%;
+        background-position: var(--zoom-x) var(--zoom-y);
+        position: absolute;
+       left: 100%;
+        top: 0;
+        margin-left: 50px;
+        /* z-index: 999; */
+        transition: background-position 0.1s ease; 
+        
+         
+    }
+</style>
+<body>
+    <div id="zoom" style="--url:url(/images/s.jpg); --zoom-x:0%; --zoom-y:0%;
+    --display: none;
+    " >
+        <img src="/images/s.jpg " alt="">
+    </div>
+    <script>
+  window.onload = function(){
+    let  zoom = document.getElementById('zoom');
+   zoom.addEventListener('mousemove', (event)=>{
+     zoom.style.setProperty('--display','block');
+    let pointer = {
+        x: (event.offsetX * 100) / zoom.offsetWidth,
+        y: (event.offsetY * 100) / zoom.offsetHeight
+    }
+    console.log(pointer)
+     zoom.style.setProperty('--zoom-x',pointer.x + '%');
+     zoom.style.setProperty('--zoom-y',pointer.y + '%');
+  });
+   zoom.addEventListener("mouseout",()=>{
+     zoom.style.setProperty('--display', 'none');
+  });
+  zoom.focus();
+  }
+    </script>
+</body> -->
+</html>

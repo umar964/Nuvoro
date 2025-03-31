@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+ 
+<body>
+    <div class="product-page1">
+        <div class="productimage">
+            <div class="product-container">
+                <%products.forEach(function(product){%>
+                    <a href="/shopping/<%= product._id%>">
+                        <div class="container">
+                            <div class="photo">
+                                
+                                <img src="data:image/jpeg;base64,<%=product.image.toString('base64')%>" alt="">
+                            </div>
+                           <div class="product-full-detail">
+                            <div class="product-name">
+                                <p><%=product.name%></p> 
+                                  
+                                 </div>
+                                 <div class="specialoffer">
+                                  <p> Welcome to  <span>UMARIS</span> !   <%=product.discount%>% off your first clothing buy!</p>
+                                  
+                                 </div>
+                                  
+                                    <div class="front-price-discount">
+                                        <div class="front-price">
+                                         
+                                           <p> <% 
+                                             var price = product.price;
+                                             var discount = product.discount;
+                                             var originalPrice = price / (1 - discount / 100); 
+                                           %>
+                                           <%= originalPrice.toFixed(0) %></p>
+                                        
+                                         <%=product.price%>.00
+                                        </div>
+                                       <span><%=product.discount%>%Off</span>
+                                      </div>
+                                      
+                                 
+                           </div>
+                            
+                    </div>
+                    </a>
+              <%  })%>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.14/dist/lenis.css">
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+ <!-- anek family  for product name and checkout -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100..800&display=swap" rel="stylesheet">
+
+
+
+</head>
+<style>
+    .photo-cart{
+        border-radius: 20px;
+        overflow: hidden;
+    }
+</style>
+
+<!-- css for responsiveness -->
+ <style>
+    @media(max-width:900px){
+        .cartpage-upper nav{
+            display: none;
+        }
+        .cart-title h2{
+            font-size: 2em;
+        }
+        .maincartpages{
+            width: 100%;
+            display: flex;
+           
+            overflow: hidden;
+            justify-content: center;
+        }
+        .checkout{
+            margin-right: 10px;
+        }
+        .maincartpage-left{
+            width: 100vw;
+        }
+        .container-cart{
+            width:100%;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            /* background-color: red; */
+            gap: 7px;
+            padding-left: 147px;
+            padding-top: 20px;
+
+        }
+        .container-cart .photo-cart{
+            width:150px;
+            height: 170px;
+           
+            
+
+        }
+        .remove-btn{
+            margin-top: 2px;
+            margin-bottom: 10px;
+        }
+        .detail-cart{
+            width: 100%;
+            white-space: normal;  
+            word-break: break-word;    
+            overflow-wrap: break-word;
+            padding-left: 12px;
+            
+        }
+        .detail-cart h3 {
+            width: 63%;
+           font-size: 1.5em; 
+           font-weight:500;
+   
+        }
+        .downfooter{
+            display: none;
+        }
+        .middlefooter{
+            display: none;
+        }
+        .footerdetail{
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+            gap: 20px;
+            height: 260px;
+          
+        }
+        .upfooter {
+           height: 210px;
+           
+           padding-bottom: 180px;
+            
+          
+        }
+    }
+ </style>
+<body>
+    <div class="cartpage-upper">
+        <nav class="all-nav">
+            <a href="/">Home</a>
+            <a href="/aboutroute"> About us</a>
+            <a href="/contact">Contact us</a>
+            <a href="/mycart">Cart</a>
+        </nav>
+    </div>
+    <%if(cartItems.length ===0){%>
+         <div class="empty-cart">
+            <h3>No product in cart!</h3>
+            <p>Add item to it now.</p>
+            <a href="/"><button>Shop now</button></a>
+         </div>
+    <%}else{%>
+    <div class="cart-title"><h2>SHOPPING  CART</h2></div>
+    <div class="maincartpages">
+       
+    
+        <div class="maincartpage-left">
+            <% cartItems.forEach(function(item) { %>
+           
+                
+                <div class="container-cart" data-item-id="<%= item._id %>">
+                    
+                        
+                   <!-- <a href="/shopping/<%=item._id%>">
+                    <div class="photo-cart">
+                        <img src="data:image/jpeg;base64,<%= item.productId.image.toString('base64') %>" alt="nono">
+                    </div>
+                   </a> -->
+
+                   <div class="photo-cart">
+                    <img src="data:image/jpeg;base64,<%= item.productId.image.toString('base64') %>" alt="nono">
+                </div>
+                    
+                    <div class="detail-cart">
+                        <h3><%= item.productId.name %></h3>
+                        <p>RS. <%= item.productId.price %>.00</p>
+                        <p><%= item.productId.discount %>%Off.</p>
+                      
+                        <p>Color : <%= item.color %>.</p>
+                        <p> Size : <%= item.size %>.</p>
+                        <p>Quantity : <%= item.quantity %>.</p>
+                        <h4>Total : <%=item.totalPrice%>.00</h4>
+                        
+                          
+                        
+                        
+                        <form action="/remove/<%=item.productId._id%>" method="post">
+                           <button  class="remove-btn" type="submit">Remove   </button>  
+                        </form>
+                    </div>
+                </div>
+              
+                
+            <% }) %>
+        </div>
+         <div class="checkout">
+            <h3> Sub-Total : <%=grandTotal%>.00</h3>
+            <form action="/checkout" method="post">
+               <div class="checkout-btn">  <button type="submit"> Checkout </button></div>
+                
+            </form>
+            <div class="continue-shopping"><a href="/">Continue shopping</a></div>
+         </div>
+    <%}%>
+    
+     
+
+ 
+
+    </div>
+
+ 
+    <div class="upfooter">
+        
+        <div class="footerdetail">
+            <div class="footerleft">
+                <span>Explore Our Social World!</span>
+                <div class="socialicon">
+                    <a href=" "><i class="fa-brands fa-instagram"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook"></i></a>
+                    <a href="www.youtube.com/@Umar___07"><i class="fa-brands fa-youtube"></i></a> 
+                    <a href=""><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="middlefooter">
+                <span>Store Address</span>
+                <div class="locationdiv">
+                    <a href=""> <i class="fa-solid fa-location-dot"></i></a>
+                    <p>No: 58 A, East Madison Street, Baltimore, MD, USA 4508</p>
+                </div>
+            </div>
+          <div class="rightfooter">
+            <span>Contact Us</span>
+            <div class="contactdiv">
+          <div class="maildiv">
+             <a href=""><i class="fa-solid fa-envelope"></i></a>
+             <p>choudharyumar653@gmail.com</p>
+          </div>
+           <div class="phonediv">
+             <a href=""><i class="fa-solid fa-phone"></i></a>
+            <p>003-332-443875</p>
+           </div>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div class="downfooter">
+        <div class="first">
+            <div class="naam">
+                INFORMATION
+            </div>
+            <a href=""> <p>About Us</p></a>
+            <a href=""> <p>Contact Us</p></a>
+            <a href=""><p>Delivery & Returns</p></a>
+            <a href=""> <p>Our Brands</p></a>
+            <a href=""><p>Awards</p></a>
+            <a href=""> <p>Our Mission</p></a>
+            <a href=""> <p>Search</p></a>
+            <a href=""> <p>Search</p></a>
+        </div>
+        <div class="second">
+            <div class="naam">
+                 SUPPORT 
+
+            </div>
+            <a href=""><p>FAQ</p></a>   
+            <a href=""><p>Shipping & Returns</p></a>  
+            <a href=""><p>Tracking</p></a>  
+            <a href=""><p>Size Charts</p> </a>  
+            <a href=""><p>Gift Cards</p></a>  
+        </div>
+         
+        <div class="fourth">
+            <div class="logofooter">
+                <img src="/images/logoweb.png" alt="">
+            </div>
+            <div class="det">
+                <p>Discover the essence of style and sophistication with <span>umaris</span>. Our curated collection offers high-quality, fashion-forward clothing designed to inspire and impress. Shop now and experience the perfect blend of comfort and elegance.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const scroll = new LocomotiveScroll({
+    el: document.querySelector('.maincartpages'), // or any container you want to smooth scroll
+    smooth: true
+  });
+       </script> 
+       <script src="https://unpkg.com/@studio-freight/lenis@1.1.14/dist/lenis.min.js"></script>
+
+    <script src="../script.js"></script>
+</body>
+</html>

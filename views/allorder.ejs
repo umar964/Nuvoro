@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+
+<style>
+    .allorder-main{
+        height: 100%;
+        width: 100%;
+      background-color:#333;
+      color: white;
+      flex-direction: column;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .allorder-main h2{
+      margin-top: 12px;
+      margin-bottom: 8px;
+      color: darksalmon;
+    }
+
+   
+
+.order-container {
+  display: flex;
+  justify-content: space-between;
+  width: 96%;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 11px;
+  /* background-color: green; */
+}
+
+.order-left {
+  width: 66%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.order-right {
+  width: 38%;
+  /* background-color: green; */
+  padding-left: 16px;
+  border-left: 2px solid#675f5f;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  
+   
+}
+
+.product-item {
+  width: 220px;
+ padding: 9px;
+  margin-left: 8px;
+  height: auto;
+  border: 0.003px solid #675f5f;
+    
+  margin-top: 9px;
+  
+}
+
+.product-item img {
+  width: 100%;
+  height:  250px;
+  object-fit: cover;
+}
+
+.orderphoto img {
+  width: 100% ;
+  height: 250px;
+  object-position: center;
+}
+
+.order-right p {
+  margin: 5px 0;
+}
+
+
+label {
+    color: white; /* Label color for visibility */
+    margin-right: 10px; /* Spacing between label and dropdown */
+}
+
+select {
+    background-color: #444; /* Dark background for the dropdown */
+    color: white; /* Text color */
+    border: 1px solid #666; /* Border color */
+    padding: 6px 12px; /* Padding for better appearance */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor for dropdown */
+    transition: background-color 0.3s, border 0.3s; /* Smooth transitions */
+}
+
+select:hover {
+    background-color: #555; /* Slightly lighter on hover */
+    border: 1px solid #888; /* Lighter border on hover */
+}
+
+select:focus {
+    outline: none; /* Remove default outline */
+    background-color: #666; /* Change background when focused */
+    border: 1px solid #fff; /* White border when focused */
+}
+
+
+.delivery-address {
+    background-color: #333; /* Dark background for the address box */
+    color: white; /* Text color */
+    border: 1px solid #555; /* Border for the box */
+    border-radius: 8px; /* Rounded corners */
+    /* padding: 15px; Padding inside the box */
+    margin-top: 20px; /* Space above the box */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    padding: 12px; /* Subtle shadow for depth */
+}
+
+.delivery-address h3 {
+    border-bottom: 2px solid #666; /* Underline the heading */
+    padding-bottom: 10px; /* Space below the heading */
+    margin-bottom: 15px; /* Space below the heading */
+}
+
+.delivery-address p {
+    margin: 5px 0; /* Space between each line */
+    line-height: 1.5; /* Improve readability */
+}
+
+.delivery-address strong {
+    color: #ffcc00; /* Highlight strong text (labels) */
+}
+
+
+#deleteAllOrders {
+    background-color:  #fe4f4f; /* bright red */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+#deleteAllOrders:hover {
+    background-color: #ff1a1a; /* darker red on hover */
+}
+
+/* Delete Specific Order Button */
+.delete-order-btn {
+    background-color:   #fe4f4f; /* bright red */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.delete-order-btn:hover {
+    background-color: #ff1a1a; /* darker red on hover */
+} 
+ 
+.search-form{
+  margin-left: 20px;
+  margin-right: 70px;
+  margin-bottom: 13px;
+}
+.search-form input{
+color: white;
+font-size: 16px;
+padding: 6px 40px;
+background-color: #888;
+margin-top: 8px;
+}
+.search-form button{
+ color: black;
+ font-size: 17px;
+ border: none;
+  padding: 8px 40px;
+  background-color: green;
+  margin-left: 650px;
+}
+.search-form input::placeholder{
+  color: white;
+}
+ 
+
+</style>
+<body>
+    <div class="allorder-main">
+      <h2>All Orders</h2>
+      <form   class="search-form" action="/admin/search-orders" method="POST">
+        <input type="text" name="emailOrUsernameOrFullname" placeholder="Filter order">
+        <input type="text" placeholder="state" name="state">
+        <input type="text" placeholder="city" name="city">
+        <input type="text" placeholder="Address" name="address">
+        <input type="number" placeholder="PIN code" name="pincode">
+        <label for="startDate">Start Date:</label>
+        <input type="date" name="startDate" />
+    
+        <label for="endDate">End Date:</label>
+        <input type="date" name="endDate" />
+        <button type="submit">Search</button>
+    </form>
+      <form action="/admin/delete-all-orders" method="POST">
+        <button type="submit" id="deleteAllOrders" onclick="return confirm('are u sure');">Delete All Orders</button>
+    </form>
+      <% orders.forEach(order => { %>
+      <div class="order-container">
+         
+        <div class="order-left">
+          <div class="product-grid">
+            <% order.products.forEach(product => { %>
+            <div class="product-item">
+              <div class="orderphoto">
+                <% if (product && product.image) { %>
+                <img src="data:image/jpeg;base64,<%= product.image %>" alt="">
+                <% } else { %>
+                <p>No image available</p>
+                <% } %>
+              </div>
+              <p><%= product.name %></p>
+              <p>Size: <%= product.size %></p>
+              <p>Color: <%= product.color %></p>
+              <p>Quantity: <%= product.quantity %></p>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+  
+        
+        <div class="order-right">
+          <p>Order ID: <%= order._id %></p>
+          <p>User Email: <%= order.userId.email %></p>
+          <form action="/updateOrderStatus/<%=order._id%>" method="post">
+            <label for="status">Status:</label>
+            <select name="status" id="status" onchange="this.form.submit()">
+              <option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+              <option value="Shipped" <%= order.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+              <option value="Delivered" <%= order.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+            </select>
+          </form>
+          <p>Total Amount: $<%= order.totalAmount %></p>
+          <p>Created Date: <%= order.createdAt.toDateString() %></p>
+          <p><%=order.paymentMethod%></p>
+
+          <form action="/admin/delete-order/<%= order._id %>" method="POST">
+            <button type="submit" class="delete-order-btn">Delete Order</button>
+        </form>
+
+           <div class="delivery-address"> 
+            <h3>Delivery Address</h3>
+            <p><strong>Full Name:</strong> <%= order.deliveryAddress.firstname %> <%= order.deliveryAddress.lastname %></p>
+            <p><strong>Address:</strong> <%= order.deliveryAddress.address %></p>
+            <p><strong>City:</strong> <%= order.deliveryAddress.city %></p>
+            <p><strong>State:</strong> <%= order.deliveryAddress.state %></p>
+            <p><strong>Country:</strong> <%= order.deliveryAddress.country %></p>
+            <p><strong>Pincode:</strong> <%= order.deliveryAddress.pincode %></p>
+            <p><strong>Phone Number:</strong> <%= order.deliveryAddress.number %></p>
+        </div> 
+        
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </body>
+  
+</html>

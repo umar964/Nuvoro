@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="../stylesheets/style.css"> -->
+</head>
+<style>
+    .delivery2-main{
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        
+    }
+    
+    .address-div h2{
+        color: #9c8321;
+        margin-top: 13px;
+    }
+
+
+  /* Main container for the form */
+.delivery2-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000; /* Black background */
+    color: white;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.address-div {
+    background-color: #1a1a1a; /* Dark grey background for form */
+    padding: 30px;
+    border-radius: 10px;
+    width:36vw;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+.address-div h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Style for input fields */
+#delivery-address-form input[type="text"],
+#delivery-address-form input[type="number"],
+#delivery-address-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #333; /* Dark input background */
+    border: 1px solid #555; /* Border color */
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+}
+
+#delivery-address-form input[type="text"]:focus,
+#delivery-address-form input[type="number"]:focus,
+#delivery-address-form select:focus {
+    outline: none;
+    border-color: #00ccff; /* Blue border on focus */
+}
+
+/* Country and State drop-downs */
+.country-div, .state-div {
+    margin-bottom: 15px;
+}
+
+#delivery-address-form select {
+    background-color: #333;
+}
+
+/* Submit button styling */
+.proceed {
+    width: 100%;
+    padding: 12px;
+    background-color: #00ccff; /* Bright blue button */
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.proceed:hover {
+    background-color: #0099cc; /* Darker blue on hover */
+}
+
+/* Style for labels inside the form */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #ccc; /* Light gray labels */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 500px) {
+   
+.address-div{
+    width: 90%;
+    margin: 10px;
+    padding-left: 20px;
+}
+    
+    .proceed {
+        font-size: 16px;
+        padding: 10px;
+        
+    }
+
+    #delivery-address-form input[type="text"],
+    #delivery-address-form input[type="number"],
+    #delivery-address-form select {
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+
+</style>
+<body>
+    <div class="delivery2-main">
+      
+        <div class="address-div">
+            <h2>Your address</h2>
+             
+            
+           
+            <form action="/proceed2" id="delivery-address-form" method="post">
+                <input type="hidden" name="orderamount" value="<%= order.totalAmount%>" readonly>
+                <input type="text" id="first-name" name="firstname"    placeholder="First Name">
+                <input type="text" id="last-name" name="lastname"     placeholder="Last Name">
+                
+                <div class="country-div">
+                    
+                    <label for="country">Country:</label>
+                    <select    name="country" id="country"    >
+                        <option value="IND">India</option>
+                        <option value="USA">United States</option>
+                        <option value="Canada">Canada</option>
+                        <option value="AUS">Australia</option>
+                        <option value="NZ">Newzeland</option>
+                    </select>
+              
+            </div>
+    
+            <div class="state-div">
+                <label for="state">State:</label>
+                <select name="state" id="country"    >
+                    <option value="jk">Jammu & Kashmir</option>
+                    <option value="PB">Punjab</option>
+                    <option value="DL">Delhi</option>
+                    <option value="MUM">Mumbai</option>
+                    <option value="Hyderbad">Hyderbad</option>
+                </select>
+            </div>
+            <input type="text" id="city" name="city"      placeholder="City">
+            <input type="text" id="pincode" name="pincode"     placeholder="PIN Code">
+             <input type="text" id="add" name="address"     placeholder="Address">
+             <input type="number" id="phn" name="number"  placeholder="Phone">
+    
+    
+          
+              <button class="proceed" type="submit"> Proceed to payment</button>
+             </form>
+          
+            
+    
+        </div>
+    </div>
+</body>
+</html>

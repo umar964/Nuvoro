@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>My Account</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 50%;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    border-radius: 8px;
+    margin-top: 30px;
+}
+.container input:hover{
+    opacity: 0.7;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.btn {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 15px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    width: 100%;
+    font-size: 17px;
+}
+
+.btn.logout {
+    background: #dc3545;
+     
+}
+
+.alert {
+    background:  #d4edda;
+    color: black;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    font-size: 19px;
+}
+
+.profile-picture {
+    text-align: center;
+    margin-bottom: 20px;
+    object-position: center;
+}
+
+.profile-picture img {
+    width: 150px; /* Aap size adjust kar sakte hain */
+    height: 150px; /* Aap size adjust kar sakte hain */
+    border-radius: 50%; /* Circular shape ke liye */
+    border: 2px solid #ddd; 
+    object-fit: cover;
+ 
+}
+
+</style>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>My Account</title>
+</head>
+<body>
+    <div class="container">
+        <h1>My Account</h1>
+        <% if (success_msg) { %>
+            <div class="alert alert-success">
+                <%= success_msg %>
+            </div>
+        <% } %>
+
+        <div class="profile-picture">
+            <img src="/images/c.jpg" alt="/images/c.jpg" class="img-fluid">
+        </div>
+
+        <form action="/my-account" method="POST" class="account-form">
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullname" value="<%= user.fullname %>" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="<%= user.username %>" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= user.email %>" required>
+            </div>
+            <div class="form-group">
+                <label for="password"> Current Password:</label>
+                <input type="password" id="password" name="currentPassword" >
+               
+            </div>
+            <div class="form-group">
+                <label for="password">  New Password:</label>
+                <input type="password" id="password" name="newPassword" >
+               
+            </div>
+            <button type="submit" class="btn">Update Profile</button>
+        </form>
+        
+        <form action="/logout" method="get" class="logout-form">
+            <button type="submit" class="btn logout" onclick="return confirm('Are you sure you want to log out');">Logout</button>
+        </form>
+    </div>
+ 
+
+</body>
+</html>

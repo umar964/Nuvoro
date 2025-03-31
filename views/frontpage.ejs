@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUVORO</title>
+    
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.14/dist/lenis.css">
+    
+    <!-- roc family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Round&display=swap" rel="stylesheet">
+
+
+
+     <!-- cdn of icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- //Montserrat family -->
+     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- anek family for name of product in front page -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100..800&display=swap" rel="stylesheet">
+
+
+      <!-- metal mannia -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+
+
+      <!-- jost family -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+ <!-- for animations of nuvoro text and for rotation of images over scrolling  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+ 
+
+
+
+<style>
+  
+
+    .slider-rotate {
+        width: 800px;  
+        height: 500px;  
+        position: relative;
+        transform-style: preserve-3d;
+        animation: rotate 25s infinite linear;
+      
+        z-index: 88;
+        
+         
+         
+    }
+
+    .item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;   
+        height: 250px;
+        transform: rotateY(calc(var(--position) * 40deg)) translateZ(500px)   ;
+        overflow: hidden;
+        border-radius: 12px; 
+         
+    }
+
+    .item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        
+    }
+
+    @keyframes rotate {
+        from {
+            transform: perspective(1900px) rotateX(-12deg) rotateY(0deg);
+        }
+        to {
+            transform: perspective(1900px) rotateX(-12deg)  rotateY(360deg);
+        }
+    }
+ 
+
+
+
+    /* css for search input of frontpage */
+.wave-group {
+  position: relative;
+  margin-top: 30px;
+  margin-left: 80px;
+}
+
+.wave-group .input {
+  font-size: 16px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 500px;
+  border: none;
+  border-bottom: 1px solid #515151;
+  background: transparent;
+}
+
+.wave-group .input:focus {
+  outline: none;
+}
+
+.wave-group .label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  display: flex;
+}
+
+.wave-group .label-char {
+  transition: 0.2s ease all;
+  transition-delay: calc(var(--index) * .05s);
+}
+
+.wave-group .input:focus ~ label .label-char,
+.wave-group .input:valid ~ label .label-char {
+  transform: translateY(-20px);
+  font-size: 16px;
+  color: #9c8321;
+}
+
+.wave-group .bar {
+  position: relative;
+  display: block;
+  width: 515px;
+}
+
+.wave-group .bar:before,.wave-group .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #9c8321;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.wave-group .bar:before {
+  left: 50%;
+}
+
+.wave-group .bar:after {
+  right: 50%;
+}
+
+.wave-group .input:focus ~ .bar:before,
+.wave-group .input:focus ~ .bar:after {
+  width: 50%;
+}
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+</style>
+
+<style>
+  .grid>div{
+    grid-row:var(--r);
+    grid-column:var(--c);
+  }
+  .moving-image{
+    background-color: 
+    #6c7059;
+    position: relative;
+     
+  }
+  .image-container{
+     
+    background-color: #313329;
+    
+     /* background-color:red ; */
+  }
+  .elem{
+    height: 185px;
+    width: 185px;
+    object-position: center;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+  .elem img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .overlay{
+    height: 370px;
+    width: 850px;
+    /* background-color: red; */
+    flex-direction: column;
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+    overflow: hidden;
+    position: sticky;
+    top: 25%;
+    z-index: 10;
+    left: 340px;
+    
+  }
+  
+  .sp{
+    color: #9c8321;
+    font-family: "Nova Round", system-ui;
+    font-weight: 1000;
+    font-style: normal;
+    font-size: 190px;
+    margin: 0 4px;
+   
+  }
+  .overlay h3 span{
+    color: #9c8321;
+    font-family: "Nova Round", system-ui;
+    font-weight: 1000;
+    font-style: normal;
+    font-size: 190px;
+  }
+  .letter {
+  margin: 0 5px; 
+  font-family: "Nova Round", system-ui;
+    font-weight: 1000;
+    font-style: normal;
+    font-size: 190px;
+  
+    color: black; 
+}
+  .overlay h3{
+    font-family: "Nova Round", system-ui;
+    font-weight: 1000;
+    font-style: normal;
+    font-size: 190px;
+    margin-right: 40px;
+   margin-top: -130px;
+    color: black;
+  }
+  .overlay h2 span{
+    display: inline-block;
+  }
+   
+</style>
+  
+<style>
+  .right{
+    position: relative;
+    height: 50px;
+    min-width:100px;
+    max-width: 50vw;
+    
+    margin-top: 25px;
+    margin-right: 10px;
+    /* max-width: 900px; */
+    /* gap: 0px; */
+    justify-content: space-between;
+     /* background-color: red; */
+   /* padding-right: -10px; */
+    overflow: hidden;
+    border-radius: 12px;
+    display: flex;
+    padding-left: 25px;
+    /* padding-right: 10px; */
+    /* justify-content:  center; */
+    align-items: center;
+    gap: 40px;
+    z-index: 88;
+    border: 1px solid #6c7059;
+
+
+  }
+  .right a{
+    position: relative;
+    display: inline-block;
+    font-size: 1.1em;
+    text-decoration: none;
+    z-index: 88;
+    
+
+  }
+  .right a:hover{
+    color:#9c8321;
+  }
+  .right i{
+    font-size: 20px;
+
+  }
+  .right i:hover{
+     color: black;
+
+  } 
+ 
+ 
+  
+  .page1{
+    background-color: #6c7059;
+    border-top: 0.5px solid black;
+  }
+  .mainfrontpage{
+     background-color: #6c7059;
+     
+  }
+  .sneakers{
+    background-color: #6c7059;
+  }
+</style>
+
+
+<!-- Admin menu css -->
+<style>
+  /* Admin menu button */
+  .admin-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0 10px;
+    font-size: 1.2rem;
+  }
+  
+  /* Mobile-like overlay menu */
+  .admin-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .admin-menu-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+  
+  .admin-menu-content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    max-width: 300px;
+    height: 100%;
+    background: #313329;
+    padding: 20px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+  }
+  
+  .admin-menu-overlay.active .admin-menu-content {
+    transform: translateX(0);
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+ 
+  
+  .admin-menu-content h3 {
+    color: #9c8321;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #9c8321;
+  }
+  
+  .admin-menu-content a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    padding: 12px 0;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+  }
+  
+  .admin-menu-content a:hover {
+    color: #9c8321;
+  }
+  .fa-solid:hover{
+    color: #9c8321;
+  }
+</style>
+
+<div class="admin-menu-overlay" id="adminMenuOverlay">
+  <div class="admin-menu-content">
+    <button class="close-btn" onclick="toggleAdminMenu()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <h3>Admin Panel</h3>
+    <a href="/owner"><i class="fa-solid fa-plus"></i> Create Product</a>
+    <a href="/admin/orders"><i class="fa-solid fa-list"></i> All Orders</a>
+    <a href="/admin-create-route"><i class="fa-solid fa-user-plus"></i> Create Admin</a>
+    <a href="/deleteProduct"><i class="fa-solid fa-trash"></i> Delete Product</a>
+    <a href="/myaccount"><i class="fa-solid fa-user"></i> Account</a>
+    <a href="/shop-page">Shop</a>
+  </div>
+</div>
+
+</head>
+<body>
+    <div class="mainfrontpage">
+        <nav>
+            <div class="up">
+         
+                    <div class="logo">
+                        
+                         <h1>NUVORO</h1>
+                    </div>
+ 
+                     <form action="/search" method="get">
+                        <div class="wave-group">
+                            <input required="" type="text" class="input" name="q">
+                            <span class="bar"></span>
+                            <label class="label">
+                              <span class="label-char" style="--index: 0">S</span>
+                              <span class="label-char" style="--index: 1">e</span>
+                              <span class="label-char" style="--index: 2">a</span>
+                              <span class="label-char" style="--index: 3">r</span>
+                              <span class="label-char" style="--index: 4">c</span>
+                              <span class="label-char" style="--index: 5">h</span>
+                            </label>
+                          </div>
+                     </form>
+ 
+                 <div class="right">
+
+                  <% if(user && user.isAdmin){%>
+                    <button class="admin-toggle" onclick="toggleAdminMenu()">
+                      <i class="fa-solid fa-gear"></i>
+                    </button>
+                  <%}else if(user){%>
+                  <a href="/">Home</a>
+                  <a href="/shop-page">Shop</a>
+                  <a href="/contact">Contact us</a>
+                  <a href="/myorder">My orders</a>
+                  <a href="/myaccount">Account</a>
+                  <a class="bag" href="/mycart"><i class="fa-solid fa-bag-shopping"></i></a>
+                       
+                   <%}else if(!user){%>
+                  <a href="/">Home</a>
+                  <a href="/shop-page">Shop</a>
+                  <a href="/contact">Contact us</a>
+                  <a href="/myorder">My orders</a>
+                  <a href="/signup">Sign Up</a>
+                  <a class="bag" href="/mycart"><i class="fa-solid fa-bag-shopping"></i></a>
+                    <%}%>
+                     
+                    
+                
+                <span></span>
+            </div>  
+ 
+          </div>  
+         
+        </nav>
+ 
+ 
+      <div class="moving-image w-full    p-5">
+        <div class="overlay">
+          <h2>
+            <span class="letter">N</span>
+            <span class="letter">U</span>
+            <span class="sp">V</span>
+            <span class="sp">O</span>
+            <span class="letter">R</span>
+            <span class="letter">O</span>
+          </h2>
+           <h3>نو<span>وو</span>رو 
+             
+             
+           </h3>
+        </div>
+        <div class="grid grid-cols-8 grid-rows-20 gap-2 overflow-hidden ">
+          <div class="elem col-span-1 row-span-1"  style="--r:1;--c:2;" ><img src="/images/t.jpg" alt="image 1" ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:1;--c:8;"><img src="/images/w.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:2;--c:4;"><img src="/images/t.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:2;--c:9;"><img src="/images/u.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:3;--c:5; "><img src="/images/k.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:3;--c:1 ;"><img src="/images/t.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:4;--c:2; "><img src="/images/w.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:4;--c:7; "><img src="/images/t.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:5;--c:8; "><img src="/images/a.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:5;--c:4;"><img src="/images/b.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:6;--c:3;"><img src="/images/t.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:6;--c:9;"><img src="/images/l.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:7;--c:5;"><img src="/images/c.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:7;--c:8;"><img src="/images/t.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:8;--c:2;"><img src="/images/a.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:8;--c:6;"><img src="/images/k.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:9;--c:9;"><img src="/images/t.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:9;--c:5;"><img src="/images/b.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:10;--c:2;"><img src="/images/c.jpg" alt="image 1"  ></div>
+          <div class=" elem col-span-1 row-span-1" style="--r:10;--c:7;"><img src="/images/f.jpg" alt="image 1"  ></div>
+        </div>
+        
+    </div>
+   
+    <div class="page1">
+       
+        <div class="page1left"  >
+            <img src=" https://plus.unsplash.com/premium_photo-1673356302101-e69975f7109a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+        </div>
+        <div class="page1right" >
+            <img src="https://images.unsplash.com/photo-1602488283247-29bf1f5b148a?q=80&w=1886&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+        </div>
+       
+    </div>
+    <div class="page2">
+        <div class="page2left" >
+            <img src="https://images.unsplash.com/photo-1622445275992-e7efb32d2257?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+        </div>
+        <div class="page2right" >
+            <img src="https://images.unsplash.com/photo-1594969155368-f19485a9d88c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+        </div>
+    </div>
+     
+         <div class="sneakers">
+            <div class=" sneakers-title">
+                <h3>Nuvoro Sneakers</h3>
+            </div>
+            <div class="banner">
+                <div class="slider-rotate" style="--quantity: 10">
+                    <% sneakers.slice(-10).forEach(function(product, index){ %>
+                        
+                        <div class="item" style="--position: <%= index %>">
+                             <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="">
+                        </div>
+                         
+                            <% }) %>
+                </div>
+                
+            </div>
+            <div class="carousel-container">
+                <div class="all-sneaker-container">
+                    <% sneakers.forEach(function(product, index){ %>
+                        <div class="sneaker-container" data-index="<%= index %>">
+                            <a href="/shopping/<%= product._id %>">
+                                <div class="sneaker-photo">
+                                    <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="">
+                                </div>
+                                <div class="product-name">
+                                    <p><%= product.name %></p>
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
+                </div>
+                <button  class="sneaker-button" id="prev-sneaker"> <i class="fa-solid fa-circle-chevron-left"></i></button>
+                <button class="sneaker-button" id="next-sneaker"><i class="fa-solid fa-circle-chevron-right"></i></button>
+            </div>
+            
+        </div>  
+  
+ 
+    <div class="footer">
+        <div class="upfooter">
+            <div class="signupfooter">
+                <span>Be in the Know! Join Our VIP List</span>
+                <p>Be the first to shop new arrivals and receive exclusive offers. Join now!</p>
+                 
+            </div>
+            <div class="footerdetail">
+                <div class="footerleft">
+                    <span>Explore Our Social World!</span>
+                    <div class="socialicon">
+                        <a href="https://www.instagram.com/umar_____07/"><i class="fa-brands fa-instagram"></i></a>
+                        <a href=""><i class="fa-brands fa-facebook"></i></a>
+                        <a href="www.youtube.com/@Umar___07"><i class="fa-brands fa-youtube"></i></a> 
+                        <a href=""><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="middlefooter">
+                    <span>Store Address</span>
+                    <div class="locationdiv">
+                        <a href=""> <i class="fa-solid fa-location-dot"></i></a>
+                        <p>No: 58 A, East Madison Street, Baltimore, MD, USA 4508</p>
+                    </div>
+                </div>
+              <div class="rightfooter">
+                <span>Contact Us</span>
+                <div class="contactdiv">
+              <div class="maildiv">
+                 <a href=""><i class="fa-solid fa-envelope"></i></a>
+                 <p>choudharyumar653@gmail.com</p>
+              </div>
+               <div class="phonediv">
+                 <a href=""><i class="fa-solid fa-phone"></i></a>
+                <p>003-332-443875</p>
+               </div>
+    
+                </div>
+              </div>
+            </div>
+    
+        </div>
+        <div class="downfooter">
+            <div class="first">
+                <div class="naam">
+                    INFORMATION
+                </div>
+                <a href=""> <p>About Us</p></a>
+                <a href=""> <p>Contact Us</p></a>
+                <a href=""><p>Delivery & Returns</p></a>
+                <a href=""> <p>Our Brands</p></a>
+                <a href=""><p>Awards</p></a>
+                <a href=""> <p>Our Mission</p></a>
+                <a href=""> <p>Search</p></a>
+                <a href=""> <p>Search</p></a>
+            </div>
+            <div class="second">
+                <div class="naam">
+                     SUPPORT 
+    
+                </div>
+                <a href=""><p>FAQ</p></a>   
+                <a href=""><p>Shipping & Returns</p></a>  
+                <a href=""><p>Tracking</p></a>  
+                <a href=""><p>Size Charts</p> </a>  
+                <a href=""><p>Gift Cards</p></a>  
+            </div>
+             
+            <div class="fourth">
+                <div class="logofooter">
+                    <img src="/images/Screenshot 2025-03-31 021950.png" alt="">
+                </div>
+                <div class="det">
+                    <p>Discover the essence of style and sophistication with <span>Nuvoro</span>. Our curated collection offers high-quality, fashion-forward clothing designed to inspire and impress. Shop now and experience the perfect blend of comfort and elegance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+       
+     
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" ></script>  
+     
+     <script>
+      const scroll = new LocomotiveScroll({
+  el: document.querySelector('.mainfrontpage'), // or any container you want to smooth scroll
+  smooth: true
+});
+     </script> 
+    
+ 
+
+ <!-- <script>
+  const cursor = document.createElement('div');
+cursor.classList.add('custom-cursor');
+document.body.appendChild(cursor);
+
+document.addEventListener('mousemove', (e) => {
+  cursor.style.left = `${e.pageX - 57}px`;
+  cursor.style.top = `${e.pageY - 20}px`;
+}); -->
+
+ 
+
+ 
+ 
+
+ </script>
+ <!-- gsap cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+
+
+ <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script> 
+ <script src="https://unpkg.com/@studio-freight/lenis@1.1.14/dist/lenis.min.js"></script>
+
+
+ <!-- Admin menu script -->
+ <script>
+  function toggleAdminMenu() {
+    const overlay = document.getElementById('adminMenuOverlay');
+    overlay.classList.toggle('active');
+    
+    // Prevent scrolling when menu is open
+    document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+  }
+  
+  // Close menu when clicking outside content
+  document.getElementById('adminMenuOverlay').addEventListener('click', function(e) {
+    if (e.target === this) {
+      toggleAdminMenu();
+    }
+  });
+</script>
+
+ <script>
+  document.querySelectorAll(".elem").forEach(elem => {
+    let image = elem.querySelector("img");
+    let tl = gsap.timeline();
+    let xTransform = gsap.utils.random(-100, 100);
+
+    const setX = gsap.quickSetter(elem, "xPercent");
+
+    tl.set(image, {
+      transformOrigin: `${xTransform < 0 ? 0 : '100%'}`,
+    })
+    
+    .to(elem, {
+       rotation:30,
+       borderRadius: "50%", // First transform the X position
+      ease: "none",
+      scrollTrigger: {
+        trigger:  elem,
+        start: "bottom 100%",
+        end: "10%",
+        scrub: true,
+        
+      }
+    })
+   
+    
+     
+  });
+</script>
+ 
+
+<script>
+gsap.from(".overlay h2 span",{
+  y:-60,
+  opacity:0,
+  duration:0.8,
+  delay:0.5,
+  stagger:-0.15
+})
+gsap.from(".overlay h3",{
+  y:80,
+  opacity:0,
+  duration:1,
+  delay:1
+})
+
+gsap.from("nav",{
+  y:-40,
+  duration:0.7,
+  opacity:0,
+  delay:1
+})
+
+gsap.from(".right a",{
+  y:-30,
+  opacity:0,
+  duration:0.5,
+  delay:1,
+  stagger:0.15
+})
+
+ 
+</script>
+
+
+ <script>
+  
+ 
+ 
+  let index = 0;
+// for sneakers
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.all-sneaker-container');
+    const items = document.querySelectorAll('.sneaker-container');
+    const totalItems = items.length;
+    const visibleItems = 2.4; // Number of items to show at a time
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        const offset = -((currentIndex * 100) / visibleItems);
+        container.style.transform = `translateX(${offset}%)`;
+    }
+
+    document.getElementById('next-sneaker').addEventListener('click', function() {
+        if (currentIndex < Math.ceil(totalItems / visibleItems) - 1) {
+            currentIndex++;
+            updateCarousel();
+        }
+    });
+
+    document.getElementById('prev-sneaker').addEventListener('click', function() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+        }
+    });
+
+    // Initialize carousel
+    updateCarousel();
+});
+ </script>
+ 
+ 
+ 
+</body>
+</html>

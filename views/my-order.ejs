@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.14/dist/lenis.css">
+</head>
+<style>
+  
+  .my-order-main {
+    background-color: rgba(0, 0, 0, 0.8); /* Light black background */
+    padding: 10px;
+    border-radius: 8px;
+}
+  
+
+.myorder-container {
+    width: 75%; /* or 85% as needed */
+    margin: 20px auto; /* Center the order container */
+    background-color: #1c1c1c; /* Dark background for each order */
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    height: auto; /* Auto height for the order container */
+}
+
+.myorder-header {
+    height: 36px; /* Fixed height */
+    padding: 10px;
+    background-color: #333; /* Darker background for the header */
+    color: #fff; /* White text color */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    font-size: 16px;
+}
+
+.myorder-body {
+    display: flex; /* Flexbox for aligning items in a row */
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    color: #ddd;
+    /* background-color: red; Light gray text color */
+}
+
+.my-order-product {
+    display: flex; /* Use flexbox for product image and details */
+    width: 60%;
+    margin-bottom: 15px;
+    flex-grow: 1; 
+    /* background-color: #ddd;Allow to grow and fill the space */
+}
+
+.my-order-photo {
+    width: 230px; 
+      height: 280px;
+    margin-right: 15px; 
+    object-position: center;
+}
+
+.my-order-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Responsive image */
+    border-radius: 5px;
+}
+
+.my-order-product-detail {
+    flex-grow: 1;
+    margin-left: 20px;
+    /* background-color: aqua; Take remaining space */
+}
+.my-order-product-detail p{
+    font-weight: 250;
+}
+.my-order-product-detail h2{
+    font-weight: 520;
+    
+    
+}
+.my-order-product-detail h2 a:hover{
+    color: #9c8321;
+}
+.my-order-product-detail h2 a{
+    text-decoration: none;
+}
+.my-order-product-detail p:hover{
+    color: #9c8321;
+    cursor: pointer;
+}
+
+.delivery-address {
+    margin-left: 20px; /* Space between product details and address */
+     width: 300px; /* Set width for delivery address section */
+    background-color: #2a2a2a; /* Background color for address section */
+    padding: 15px;
+
+    border-radius: 5px;
+    top: 0px;
+}
+.delivery-address p{
+    font-weight: 250;
+    font-size: 16px;
+}
+.delivery-address p:hover{
+    color: #9c8321;
+    cursor: pointer;
+}
+
+.delivery-address span{
+    font-size: 15px;
+}
+.mainshopping-upperimage{
+    flex-direction:column;
+    display: flex;
+    justify-content: space-evenly;
+    align-items:center;
+    height: 120px;
+    margin-top: -19px;
+    background-color: #000;
+}
+.all-nav{
+    margin-top: -52px;
+}
+.myorder-header span{
+    color: #9c8321;
+}
+ 
+
+
+.product-link {
+    position: relative;
+     
+    text-decoration: none;
+}
+
+ 
+ 
+
+.product-link:hover::after {
+    content: "Click to search product"; /* Custom tooltip message */
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    top: 100%;
+    left: 0;
+    transform: translateY(-55px);
+    z-index: 10;
+    font-size: 12px;
+}
+
+
+ 
+
+ 
+
+ 
+
+
+
+
+</style>
+<body>
+         
+     
+
+<div class="my-order-main">
+    <div class="mainshopping-upperimage">
+         
+       
+        <nav class="all-nav">
+            <a href="/">Home</a>
+            <a href="/aboutroute"> About us</a>
+            <a href="/contact">Contact us</a>
+            <a href="/mycart">Cart</a>
+        </nav>
+        <form action="/search" method="get">
+            <div class="wave-group">
+                <input required="" type="text" class="input" name="q">
+                <span class="bar"></span>
+                <label class="label">
+                  <span class="label-char" style="--index: 0">S</span>
+                  <span class="label-char" style="--index: 1">e</span>
+                  <span class="label-char" style="--index: 2">a</span>
+                  <span class="label-char" style="--index: 3">r</span>
+                  <span class="label-char" style="--index: 4">c</span>
+                  <span class="label-char" style="--index: 5">h</span>
+                </label>
+              </div>
+         </form>
+    </div>
+    
+      
+<% if (orders && orders.length > 0) { %>
+    <% orders.forEach(order => { %>
+    <div class="myorder-container">
+           <!-- Upper div for order details -->
+        <div class="myorder-header">
+              <span>Ordered on: <%= order.createdAt.toDateString() %></span>
+              <span>Total Amount: $<%= order.totalAmount %></span>
+              <span>Order:#<%= order._id %></span>
+                </div>
+
+            <!-- Lower div for product details -->
+            <div class="myorder-body">
+            <% order.products.forEach(product => { %>
+                 <div class="my-order-product">
+           <!-- First div for product image -->
+           <div class="my-order-photo">
+            <% if (product && product.image) { %>
+     <img src="data:image/jpeg;base64,<%= product.image %>" alt="">
+            <% } else { %>
+              <p>No image available</p>
+                   <% } %>
+                  </div>
+    
+     <!-- Second div for product details -->
+     <div class="my-order-product-detail">
+         <% if (product) { %>
+             
+             <h2><a href="/search?q=<%= product.name %>"   class="product-link"><%= product.name %></a></h2>
+
+              
+              
+             <p>Price: $<%= product.price %>.00</p>
+             <p>Color: <%= product.color || 'Not specified' %></p>
+             <p>Size: <%= product.size || 'Not specified' %></p>
+             <p>Quantity: <%= product.quantity || 'Not specified' %></p>
+             <%
+             const price = product.price || 0;
+             const quantity = product.quantity || 0;
+             const subtotal = price * quantity;
+             %>
+             <p>Sub-total: $<%= subtotal %>.00</p>
+         <% } else { %>
+             <p>No information</p>
+         <% } %>
+     </div>
+                            </div>
+         <% }) %>
+    
+         <!-- Third div for delivery address -->
+         <div class="delivery-address">
+            <span>SHIP TO</span>
+             <p>  <%= order.deliveryAddress.firstname %> <%= order.deliveryAddress.lastname %></p>
+             <p>  <%= order.deliveryAddress.address %></p>
+             <p>  <%= order.deliveryAddress.city %>, <%= order.deliveryAddress.state %></p>
+             <p> <%= order.deliveryAddress.pincode %></p>
+             <p> <%= order.deliveryAddress.country %></p>
+           
+              
+         </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    
+    
+        <div class="upfooter">
+            
+            <div class="footerdetail">
+                <div class="footerleft">
+                    <span>Explore Our Social World!</span>
+                    <div class="socialicon">
+                        <a href=" "><i class="fa-brands fa-instagram"></i></a>
+                        <a href=""><i class="fa-brands fa-facebook"></i></a>
+                        <a href="www.youtube.com/@Umar___07"><i class="fa-brands fa-youtube"></i></a> 
+                        <a href=""><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="middlefooter">
+                    <span>Store Address</span>
+                    <div class="locationdiv">
+                        <a href=""> <i class="fa-solid fa-location-dot"></i></a>
+                        <p>No: 58 A, East Madison Street, Baltimore, MD, USA 4508</p>
+                    </div>
+                </div>
+              <div class="rightfooter">
+                <span>Contact Us</span>
+                <div class="contactdiv">
+              <div class="maildiv">
+                 <a href=""><i class="fa-solid fa-envelope"></i></a>
+                 <p>choudharyumar653@gmail.com</p>
+              </div>
+               <div class="phonediv">
+                 <a href=""><i class="fa-solid fa-phone"></i></a>
+                <p>003-332-443875</p>
+               </div>
+    
+                </div>
+              </div>
+            </div>
+    
+        </div>
+
+    </div>
+    
+
+    
+    <script>
+        const scroll = new LocomotiveScroll({
+    el: document.querySelector('.my-order-main'), // or any container you want to smooth scroll
+    smooth: true
+  });
+       </script>  
+       <script src="https://unpkg.com/@studio-freight/lenis@1.1.14/dist/lenis.min.js"></script>
+
+
+
+</body>
+</html>

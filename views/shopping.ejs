@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100..800&display=swap" rel="stylesheet">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100..800&display=swap" rel="stylesheet">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+
+
+
+</head>
+ <style>
+    #flash-message {
+    background-color: black;
+    color: white;
+    padding: 18px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: auto;
+    max-width: 90%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-in-out;
+}
+.shoppingleft{
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+ 
+
+ </style>
+<body>
+   <div class="shopping-nav">
+   
+    <form action="/search" method="get">
+        <div class="wave-group">
+            <input required="" type="text" class="input" name="q">
+            <span class="bar"></span>
+            <label class="label">
+              <span class="label-char" style="--index: 0">S</span>
+              <span class="label-char" style="--index: 1">e</span>
+              <span class="label-char" style="--index: 2">a</span>
+              <span class="label-char" style="--index: 3">r</span>
+              <span class="label-char" style="--index: 4">c</span>
+              <span class="label-char" style="--index: 5">h</span>
+            </label>
+          </div>
+     </form>
+    
+     
+   </div>
+ <div class="mainshopping">
+    <div class="mainshopping-upperimage">
+         
+        <nav class="all-nav">
+            <a href="/">Home</a>
+            <a href="/aboutroute"> About us</a>
+            <a href="/contact">Contact us</a>
+            <a href="/mycart">Cart</a>
+        </nav>
+         
+    </div>
+    <% if (success_msg) { %>
+        <div class="alert alert-success" id="flash-message">
+            <%= success_msg %>
+        </div>
+    <% } %>
+ <div class="shopping-left-right">
+    <div class="shoppingleft">
+        <img id="zoom-img" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="">
+    </div>
+    <div class="shoppingright">
+        <div class="shopping-name"> <p><%=product.name%></p></div>
+        <div class="shopping-price"> <p> Price : <span id="price"><%=product.price%>.00</span></p></div>
+
+
+        <form  id="shoppingform"  autocomplete="off" action=" /purchase/<%= product._id %>"   method="post">
+            <div class="size">
+                <p>Size</p> 
+                <% product.sizes.forEach(size => { %>
+     <div class="size-option" data-size="<%= size%>">
+                 <input type="radio" id="size_<%= size %>" name="size"  value= "<%= size %>" >
+                 <label for="size_<%= size %>"><%= size %></label>
+     </div>
+                 <% }); %>
+ 
+     </div>
+     <div class="color">
+        <p>Color</p>
+         <% product.colors.forEach(color => { %>
+             <div id="color" name="color" class="color-option"   data-color="<%= color%>">
+                 <input type="radio" id="color_<% color%>" name="color"  value="<%=color%>"  >
+                 <label  for="color_<%=color%>"> <%=color%></label>
+             </div>
+         <% }); %>
+
+
+        
+     </div>
+     <div class="quantity">
+         <button type="button" class="quantity-button" id="decrease">-</button>
+         <input type="number" id="quantity" name="quantity" class="quantity-input" value="1" min="1" readonly>
+         <button type="button" class="quantity-button" id="increase">+</button>
+     </div>
+     
+     <div class="cart-buynow">
+        <button  class="cart-btn" id="addtocart" type="button" onclick="setFormAction('/addtocart/<%= product._id %>')">Add To Cart</button>
+             <div class="buy-now">
+                <button type="submit">Buy Now</button>
+             </div>
+          
+     </div>
+        </form>
+        <div class="size-guide">
+          <p>Size Guide</p>
+        </div>
+        <div class="shopping-detail">
+            <p> <%=product.description%>
+        </p>
+        </div>
+    </div>
+ </div>
+
+ 
+
+
+
+
+
+
+
+ <% if (similarProducts.length > 0) { %>
+     <div class="related-product-heading">
+        <p>TOP RATED</p>
+    <h2>Related Product</h2>
+     </div>
+   <div class="related-products">
+    <ul>
+        <% similarProducts.forEach(product => { %>
+            <a href="/shopping/<%=product._id%>">
+                <div class="container">
+                    <div class="photo">
+                     
+                        <img src="data:image/jpeg;base64,<%=product.image.toString('base64')%>" alt="">
+                    </div>
+                   <div class="product-full-detail">
+                    <div class="product-name">
+                        <p><%=product.name%></p> 
+                          
+                         </div>
+                          
+                         <div class="related-price-discount">
+                            <div class="related-price">
+                             
+                               <p> <% 
+                                 var price = product.price;
+                                 var discount = product.discount;
+                                 var originalPrice = price / (1 - discount / 100); 
+                               %>
+                               <%= originalPrice.toFixed(0) %></p>
+                            
+                             <%=product.price%>.00
+                            </div>
+                           <span><%=product.discount%>%Off</span>
+                          </div>
+                   </div>
+                    
+            </div>
+            </a>
+        <% }) %>
+    </ul>
+<% } else { %>
+     <div class="no-similar-products-shopping">
+    <p>No similar products found !</p>
+     </div>
+<% } %>
+   </div>
+ </div>
+
+
+
+ 
+
+
+
+ <script>
+    function setFormAction(actionUrl) {
+        document.getElementById('shoppingform').action = actionUrl;
+        document.getElementById('shoppingform').submit();
+    }
+</script>
+
+<div class="footer">
+    <div class="upfooter">
+        <div class="signupfooter">
+            <span>Be in the Know! Join Our VIP List</span>
+            <p>Be the first to shop new arrivals and receive exclusive offers. Join now!</p>
+            <div class="value">
+                
+                     <form action="/signup" method="post">
+                        <input class="fullname" type="text" name="fullname" placeholder="Full Name">
+                    <input class="username" type="text" name="username" placeholder="User Name">
+                    <input class="email" type="text" name="email" placeholder="Enter your email address...">
+                    <input type="password" name="password" placeholder="password">
+                    <input class="sbmt" type="submit" placeholder="Submit">
+                     </form>
+              
+            </div>
+        </div>
+        <div class="footerdetail">
+            <div class="footerleft">
+                <span>Explore Our Social World!</span>
+                <div class="socialicon">
+                    <a href=" "><i class="fa-brands fa-instagram"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook"></i></a>
+                    <a href="www.youtube.com/@Umar___07"><i class="fa-brands fa-youtube"></i></a> 
+                    <a href=""><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="middlefooter">
+                <span>Store Address</span>
+                <div class="locationdiv">
+                    <a href=""> <i class="fa-solid fa-location-dot"></i></a>
+                    <p>No: 58 A, East Madison Street, Baltimore, MD, USA 4508</p>
+                </div>
+            </div>
+          <div class="rightfooter">
+            <span>Contact Us</span>
+            <div class="contactdiv">
+          <div class="maildiv">
+             <a href=""><i class="fa-solid fa-envelope"></i></a>
+             <p>choudharyumar653@gmail.com</p>
+          </div>
+           <div class="phonediv">
+             <a href=""><i class="fa-solid fa-phone"></i></a>
+            <p>003-332-443875</p>
+           </div>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div class="downfooter">
+        <div class="first">
+            <div class="naam">
+                INFORMATION
+            </div>
+            <a href=""> <p>About Us</p></a>
+            <a href=""> <p>Contact Us</p></a>
+            <a href=""><p>Delivery & Returns</p></a>
+            <a href=""> <p>Our Brands</p></a>
+            <a href=""><p>Awards</p></a>
+            <a href=""> <p>Our Mission</p></a>
+            <a href=""> <p>Search</p></a>
+            <a href=""> <p>Search</p></a>
+        </div>
+        <div class="second">
+            <div class="naam">
+                 SUPPORT 
+
+            </div>
+            <a href=""><p>FAQ</p></a>   
+            <a href=""><p>Shipping & Returns</p></a>  
+            <a href=""><p>Tracking</p></a>  
+            <a href=""><p>Size Charts</p> </a>  
+            <a href=""><p>Gift Cards</p></a>  
+        </div>
+         
+        <div class="fourth">
+            <div class="logofooter">
+                <img src="/images/logoweb.png" alt="">
+            </div>
+            <div class="det">
+                <p>Discover the essence of style and sophistication with <span>umaris</span>. Our curated collection offers high-quality, fashion-forward clothing designed to inspire and impress. Shop now and experience the perfect blend of comfort and elegance.</p>
+            </div>
+        </div>
+    </div>
+   </div>
+   <script>
+    // JavaScript
+window.onload = function() {
+    var flashMessage = document.getElementById('flash-message');
+
+    if (flashMessage) {
+        // Add the 'show' class to trigger the CSS animation
+        flashMessage.classList.add('show');
+        
+        // Remove the flash message after 3 seconds
+        setTimeout(function() {
+            flashMessage.style.opacity = '0';
+        }, 3000); 
+    }
+};
+
+   </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" ></script> 
+
+
+ 
+ <script src="../script2.js"></script>
+
+</body>
+</html>

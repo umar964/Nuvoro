@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+    <div class="mainsignup">
+       
+
+            
+           
+            <form class="form" action="/signup" method="post">
+                <p class="title">Register </p>
+                <p class="message">Signup now and get full access to our app. </p>
+                     
+                    <label>
+                        <input class="input" type="fullname" name="fullname" placeholder="" required="">
+                        <span>Fullname</span>
+                    </label>
+            
+                    <label>
+                        <input class="input" type="username" name="username" placeholder="" required="">
+                        <span>Username</span>
+                    </label>
+                
+                        
+                <label>
+                    <input class="input" type="email" name="email" placeholder="" required="">
+                    <span>Email</span>
+                </label> 
+                    
+                <label>
+                    <input class="input" type="password" name="password" pattern="(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}" 
+                    title="Password must be at least 6 characters long, include one letter, one digit, and one special character." placeholder="" required="">
+                     
+                    <span>Password</span>
+                </label>
+                <label>
+                    <input class="input" type="password" name="confirmpassword" placeholder="" required="">
+
+                    <span>Confirm password</span>
+                </label>
+                <button class="submit">Submit</button>
+                <p class="signin">Already have an acount ? <a href="/login">Signin</a> </p>
+            </form>
+
+    </div> 
+     
+</body>
+</html>

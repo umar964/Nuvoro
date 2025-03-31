@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<STYLE>
+    .container{
+        width: 100vw;
+        height: 95vh;
+        position: relative;
+        overflow: hidden;
+
+    }
+    .vid-bg{
+   height: 100%;
+   width: 100%;
+   object-fit: cover;
+    }
+    .vid-text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform:translate(-50%,-50%);
+        color:#fff;
+        background-color:#000;
+        font-size: 140px;
+        font-family: sans-serif;
+        font-weight: 900;
+        padding: 0 30px;
+        mix-blend-mode:multiply ;
+        border-top-right-radius: 100px;
+        border-bottom-left-radius: 100px;
+        
+
+    }
+    #muteButton{
+        width: 120px;
+        height: 45px;
+        background-color: black;
+        color: white;
+        padding: 0 10px;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform:translate(-50%,-50%);
+        font-size: 19px;
+        font-family: sans-serif;
+        font-weight: 550;
+    }
+</STYLE>
+<body>
+    <div class="container">
+        <video class="vid-bg"  id="myVideo"  muted autoplay loop  src="/images/winter kashmir.mp4"></video>
+        <div class="vid-text" id="vid-text">
+            KASHMIR
+            
+        </div>
+        <!-- <button id="muteButton"></button> -->
+    </div>
+    <script>
+        const video = document.getElementById('myVideo');
+        const muteButton = document.getElementById('muteButton');
+        const vidtext = document.getElementById('vid-text');
+      
+        video.addEventListener('click', function() {
+          // Unmute the video and play
+          if(video.muted){
+            video.muted = false;
+             
+            vidtext.style.display= 'none';
+             
+          }else{
+            video.muted = true;
+            
+            vidtext.style.display= 'block';
+            
+          }
+          
+           
+          
+          
+          
+          
+          
+           
+        });
+      </script>
+</body>
+</html>

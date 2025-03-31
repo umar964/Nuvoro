@@ -1,0 +1,49 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <style>
+    .sneakers {
+    width: 100%;
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 images per row */
+    grid-gap: 10px;
+    width: 100%;
+}
+
+.image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+ </style>
+ <body>
+    <div class="sneakers">
+        <div class="banner">
+            <div class="image-grid">
+                <% sneakers.slice(-20).sort(() => Math.random() - 0.5).forEach(function(product, index){ %>  <!-- Randomize images -->
+                    <div class="image-item">
+                        <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="Sneaker Image">
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    
+ </body>
+ </html>

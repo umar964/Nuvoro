@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<style>
+  body {
+    font-family: 'Jost', sans-serif;
+    background-color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  .mainedit {
+    width: 90%;
+    max-width: 600px;
+    background: black;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  input {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #333;
+    font-size: 1rem;
+    font-family: 'Jost', sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #9c8321;
+    box-shadow: 0 0 0 3px rgba(156, 131, 33, 0.2);
+  }
+
+  .oldphoto {
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  .oldphoto img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+  }
+
+  input[type="file"] {
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px dashed #ccc;
+    text-align: center;
+    background-color: #333;
+  }
+
+  input[type="file"]::file-selector-button {
+    background: #9c8321;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-right: 1rem;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    transition: background 0.3s;
+  }
+
+  input[type="file"]::file-selector-button:hover {
+    background: #7a6920;
+  }
+
+  button[type="submit"] {
+    background: #9c8321;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  button[type="submit"]:hover {
+    background: #7a6920;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(156, 131, 33, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .mainedit {
+      width: 95%;
+      padding: 1.5rem;
+    }
+    
+    input, button {
+      padding: 10px 12px;
+    }
+  }
+</style>
+<body>
+   
+   <div class="mainedit">
+ 
+    <form action="/editproduct" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="productId" value="<%= product._id %>" />
+     
+      <input type="text" name="name" value="<%= product.name %>" placeholder=" Product Name" />
+      <input type="number" name="price" value="<%= product.price %>" placeholder="Price" />
+      <input type="number" name="discount" value="<%=product.discount %>" placeholder="Discount" />
+    
+      <!-- Show the old image -->
+    <div class="oldphoto">
+      <img src=" data:image/jpeg;base64,<%=  product.image.toString('base64')%>" alt="  product Image"  />
+    </div>
+    
+      <input type="file" name="image" />
+      <button type="submit">Update Product</button>
+    </form>
+ 
+   </div>
+    
+ 
+</body>
+</html>

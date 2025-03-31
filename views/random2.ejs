@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+ <style>
+    .payment-options {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.pay-now-btn {
+    background-color: #4CAF50; /* Customize this color */
+    color: white; /* Text color */
+    font-size: 18px; /* Font size */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Hover effect transition */
+}
+
+.pay-now-btn:hover {
+    background-color: #45a049; /* Hover color */
+}
+
+.cod-btn {
+    background-color: #FF5722; /* Orange color for COD */
+    color: white;
+    font-size: 18px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cod-btn:hover {
+    background-color: #e64a19;
+}
+ </style>
+
+<body>
+    <div class="payment-options">
+        <button class="pay-now-btn">Pay Now</button>
+        <button class="cod-btn">Cash on Delivery (COD)</button>
+    </div>
+    
+</body>
+</html>

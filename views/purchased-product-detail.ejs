@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchased Product Details</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+    
+
+    <div class="main-purchased-product">
+        <form action="/delete-all-order" method="post">
+            <button type="submit" onclick="return confirm('Are u sure to delete all order')">Delete all order </button>
+         
+        </form>
+        <div class="purchased-product-heading">
+            <h1>Purchased Product Details</h1>
+        </div>
+          
+        
+    
+        <% if (orders.length>0){%>
+            <% orders.forEach(order=>{%>
+     
+    
+                
+       <% order.products.forEach(product=>{%>
+        <div class="purchased-product">
+            <h2><%= order._id%></h2>            <h2>Product Name: <%= product.name %> &hearts;</h2>
+            <p>Price: $<%= product.price %></p>
+            <p>Quantity: <%= product.quantity %></p>
+            <p>Size: <%= product.size || 'N/A' %></p>
+            <p>Color: <%= product.color || 'N/A' %></p>
+           
+             
+           <p>Delivery Address: <%= order.deliveryAddress.firstname %>, <%= order.deliveryAddress.city %>, <%= order.deliveryAddress.state %>, <%= order.deliveryAddress.country %></p>
+           <p> Total : <%=order.totalAmount%></p>
+        
+        <p>Payment Method: <%=order.paymentMethod%></p>
+        <div class="purchased-product-photo">
+            <img src="<%= product.imageUrl %>" alt="Product Image" />
+        </div>
+        
+        </div>
+         
+       <%})%>
+  
+     
+            <%})%>
+       <%  }else{%>
+            <p>No product found</p>
+         <%}%>
+         
+    </div>
+</body>
+</html>

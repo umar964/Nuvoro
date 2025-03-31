@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+ <style>
+    .alert {
+         
+    background:scroll;
+    color:  whitesmoke;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    font-size: 17px;
+    width: 400px;
+    text-align: center;
+   
+}
+.main-login{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ </style>
+<body>
+     
+
+
+    
+           <div class="main-login">
+            <% if (error_msg) { %>
+                <div class="alert alert-success">
+                      <%= error_msg %>
+                </div>
+            <% } %>
+             
+            <form class="form" action="/login" method="post">
+                <p class="title">Register </p>
+                 
+                     
+                        
+                <label>
+                    <input class="input" type="email" name="email" placeholder="" required="">
+                    <span>Email</span>
+                </label> 
+                    
+                <label>
+                    <input class="input" type="password" name="password" placeholder="" required="">
+                    <span>Password</span>
+                </label>
+               
+                <button class="submit">LogIn</button>
+                <p class="signin">New user ? <a href="/signup">Signup</a> </p>
+            </form>
+             
+           </div>
+         
+ 
+
+
+
+
+
+</body>
+</html>
